@@ -21,7 +21,7 @@ router.post('/add', async(req,res) => {
 });
 router.get('/', async(req,res) => {
     const links = await pool.query("SELECT * FROM links");
-    res.render("links/list.hbs", {links});
+    res.render("links/list", {links});
 });
 router.get('/delete/:id', async(req,res)=>{
     const{id}=req.params;
@@ -32,8 +32,8 @@ router.get('/edit/:id', async(req,res)=>{
     const{id} = req.params;
     const links = await pool.query('SELECT * FROM links WHERE id = ?',[id]);
     console.log(links);
-    res.render('/links/edit', { links: links });
-    //console.log(id);
+    res.render('links/edit', { link: links[0] });
+
     //res.send('received');
 
 })
